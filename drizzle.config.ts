@@ -4,7 +4,6 @@ export default defineConfig({
   schema: "./src/drizzle/schema.ts",
   out: "./src/drizzle/migrations",
   dialect: "postgresql",
-  driver: "pglite",
   dbCredentials: {
     url: process.env.DATABASE_URL as string,
   },

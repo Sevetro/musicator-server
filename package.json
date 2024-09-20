@@ -1,10 +1,12 @@
 {
   "name": "musicator-server",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/index.js"
+    "dev": "tsx watch src/index.js",
+    "db:generate": "drizzle-kit generate"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +15,7 @@
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
     "express": "^4.21.0",
-    "postgres": "^3.4.4"
+    "pg": "^8.13.0"
   },
   "devDependencies": {
     "@tsconfig/node12": "^12.1.3",
