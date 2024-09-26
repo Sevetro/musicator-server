@@ -1,15 +1,6 @@
-// import 'dotenv/config'
-import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Client } from "pg";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { client, db } from "./db.js";
 
-const client = new Client({
-  host: "127.0.0.1",
-  port: 5432,
-  user: "postgres",
-  password: "password",
-  database: "db_name",
-});
+await migrate(db, { migrationsFolder: "./src/drizzle/migrations" });
 
-// await client.connect();
-// const db = drizzle(client);
+await client.end();

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/index.js",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/drizzle/migrate.ts"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
     "@types/node": "^18.19.50",
+    "@types/pg": "^8.11.10",
     "drizzle-kit": "^0.24.2",
     "tsx": "^4.19.1",
     "typescript": "^5.4.2"
