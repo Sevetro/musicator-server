@@ -7,7 +7,7 @@
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
     "pm2": "node ./node_modules/pm2/bin/pm2",
-    "pm2:start": "node ./node_modules/pm2/bin/pm2 start src/index.js",
+    "pm2:start": "node ./node_modules/pm2/bin/pm2 start src/index.ts --interpreter tsx",
     "pm2:stop": "node ./node_modules/pm2/bin/pm2 stop",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
