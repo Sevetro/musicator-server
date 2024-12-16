@@ -23,6 +23,7 @@ const corsOptions = {
 app.use(cors(corsOptions)); //TODO: should use????
 
 app.get("/", async (req, res) => {
+  console.log(`accessed /`);
   const users = await db.select().from(userTable);
   res.status(200).json(users);
 });
