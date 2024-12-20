@@ -3,7 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 
 import { db } from "./db/index.ts";
-import { userTable } from "./db/schema.ts";
+import { usersTable } from "./db/schema.ts";
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(cors(corsOptions)); //TODO: should use????
 
 app.get("/", async (req, res) => {
   console.log(`accessed /`);
-  const users = await db.select().from(userTable);
+  const users = await db.select().from(usersTable);
   res.status(200).json(users);
 });
 
