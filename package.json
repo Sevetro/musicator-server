@@ -13,7 +13,8 @@
     "db:push": "drizzle-kit push",
     "db:migrate": "drizzle-kit migrate",
     "create-user": "tsx src/scripts/create-user.ts",
-    "get-users": "tsx src/scripts/get-users.ts"
+    "get-users": "tsx src/scripts/get-users.ts",
+    "drop-table": "tsx src/scripts/drop-table.ts"
   },
   "author": "",
   "license": "ISC",
