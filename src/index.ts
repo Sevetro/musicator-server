@@ -1,6 +1,6 @@
 import express from "express";
 import "dotenv/config";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 
 import { db } from "./db/index.ts";
 import { usersTable } from "./db/schema.ts";
@@ -10,8 +10,8 @@ const app = express();
 app.use(express.json());
 
 const whitelist = ["http://localhost:3000"];
-const corsOptions = {
-  origin: (origin: any, callback: any) => {
+const corsOptions: CorsOptions = {
+  origin: (origin, callback) => {
     if (!origin || whitelist.includes(origin)) {
       callback(null, true);
     } else {
@@ -29,7 +29,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log(req);
+  console.log(req.body);
   res.status(200).send(req.body);
 });
 
