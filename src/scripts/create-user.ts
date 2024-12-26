@@ -5,7 +5,7 @@ async function createUser() {
   try {
     const result = await db
       .insert(usersTable)
-      .values({ email: "dupa@gmail.com", name: "Ukaszek", password: "HASUO" });
+      .values({ email: "asd", name: "asdasd", hashedPassword: "asdasdasd" });
     console.log("User created successfully:", result);
   } catch (error) {
     console.error("Error creating user:", error);
