@@ -15,7 +15,8 @@
     "db:migrate": "drizzle-kit migrate",
     "create-user": "tsx src/scripts/create-user.ts",
     "get-users": "tsx src/scripts/get-users.ts",
-    "drop-table": "tsx src/scripts/drop-table.ts"
+    "drop-table": "tsx src/scripts/drop-table.ts",
+    "clear-table": "tsx src/scripts/clear-table.ts"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +31,7 @@
     "drizzle-kit": "^0.25.0",
     "drizzle-orm": "^0.34.1",
     "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
     "pg": "^8.13.0",
     "pm2": "^5.4.2"
@@ -38,6 +40,7 @@
     "@tsconfig/node18": "^18.2.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^18.19.50",
     "@types/nodemailer": "^6.4.17",
     "@types/pg": "^8.11.10",
