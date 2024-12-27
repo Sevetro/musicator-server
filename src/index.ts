@@ -10,29 +10,39 @@ import {
   nameOccupiedErrorCode,
 } from "./shared/error-codes.ts";
 
+const musicatorAppUrl = "https://musicator.vercel.app";
+
 const app = express();
 
 app.use(express.json());
 
-const whitelist = ["http://localhost:3000"];
-const corsOptions: CorsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-app.use(cors(corsOptions)); //TODO: should use????
+// const whitelist = ["http://localhost:3000"];
+// const corsOptions: CorsOptions = {
+//   origin: (origin, callback) => {
+//     if (!origin || whitelist.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
+// };
+// app.use(cors(corsOptions)); //TODO: should use????
 
-app.options("/register", (req, res) => {
-  res.set("Access-Control-Allow-Origin", "https://frontend.example.com");
-  res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.send();
-});
+app.use(
+  cors({
+    origin: musicatorAppUrl, // Replace with your frontend's URL
+    methods: ["GET", "POST", "OPTIONS"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  })
+);
+
+// app.options("/register", (req, res) => {
+//   res.set("Access-Control-Allow-Origin", "https://frontend.example.com");
+//   res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+//   res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.send();
+// });
 
 app.get("/", async (req, res) => {
   console.log(`accessed /`);
