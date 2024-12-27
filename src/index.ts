@@ -47,12 +47,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.options("*", (req, res) => {
+//   res.set("Access-Control-Allow-Origin", musicatorAppUrl);
+//   res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+//   res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.status(204).send();
+// });
+
+// start of changes after nginx configuration
 app.options("*", (req, res) => {
-  res.set("Access-Control-Allow-Origin", musicatorAppUrl);
-  res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.status(204).send();
 });
+// end of changes after nginx configuration
 
 app.get("/", async (req, res) => {
   console.log(`accessed /`);
