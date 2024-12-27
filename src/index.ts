@@ -29,13 +29,23 @@ app.use(express.json());
 // };
 // app.use(cors(corsOptions)); //TODO: should use????
 
-app.use(
-  cors({
-    origin: musicatorAppUrl, // Replace with your frontend's URL
-    methods: ["GET", "POST", "OPTIONS"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  })
-);
+// app.use(
+//   cors({
+//     origin: musicatorAppUrl, // Replace with your frontend's URL
+//     methods: ["GET", "POST", "OPTIONS"], // Allowed methods
+//     allowedHeaders: ["Content-Type", "content-type", "Authorization"], // Allowed headers
+//   })
+// );
+
+app.use((req, res, next) => {
+  res.set("Access-Control-Allow-Origin", musicatorAppUrl);
+  res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, content-type, Authorization"
+  );
+  next();
+});
 
 app.options("*", (req, res) => {
   res.set("Access-Control-Allow-Origin", musicatorAppUrl);
