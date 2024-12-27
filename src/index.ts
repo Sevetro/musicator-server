@@ -37,7 +37,7 @@ app.use(
   })
 );
 
-app.options("/register", (req, res) => {
+app.options("*", (req, res) => {
   res.set("Access-Control-Allow-Origin", "https://frontend.example.com");
   res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
