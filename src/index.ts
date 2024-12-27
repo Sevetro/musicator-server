@@ -16,26 +16,26 @@ const app = express();
 
 app.use(express.json());
 
-const whitelist = ["http://localhost:3000"];
-const corsOptions: CorsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-app.use(cors(corsOptions)); //TODO: should use????
+// const whitelist = ["http://localhost:3000"];
+// const corsOptions: CorsOptions = {
+//   origin: (origin, callback) => {
+//     if (!origin || whitelist.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
+// };
+// app.use(cors(corsOptions)); //TODO: should use????
 
-// app.use(
-//   cors({
-//     origin: musicatorAppUrl, // Replace with your frontend's URL
-//     methods: ["GET", "POST", "OPTIONS"], // Allowed methods
-//     allowedHeaders: ["Content-Type", "content-type", "Authorization"], // Allowed headers
-//   })
-// );
+app.use(
+  cors({
+    origin: musicatorAppUrl, // Replace with your frontend's URL
+    methods: ["GET", "POST", "OPTIONS"], // Allowed methods
+    allowedHeaders: ["Content-Type", "content-type", "Authorization"], // Allowed headers
+  })
+);
 
 // app.use((req, res, next) => {
 //   res.set("Access-Control-Allow-Origin", musicatorAppUrl);
