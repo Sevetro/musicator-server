@@ -51,7 +51,7 @@ app.options("*", (req, res) => {
   res.set("Access-Control-Allow-Origin", musicatorAppUrl);
   res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.send();
+  res.status(204).send();
 });
 
 app.get("/", async (req, res) => {
