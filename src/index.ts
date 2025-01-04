@@ -29,6 +29,11 @@ app.use(express.json());
 // };
 // app.use(cors(corsOptions)); //TODO: should use????
 
+// app.set("trust proxy", true); // Ensure this is set if behind a proxy
+// If your app is behind a reverse proxy (e.g., Nginx or AWS ELB),
+// and you’ve set the trust proxy setting, req.ips will contain
+// an array of IPs from the X-Forwarded-For header.
+
 app.options("*", (req, res, next) => {
   console.log(`accessed OPTIONS`);
 
@@ -51,6 +56,9 @@ app.options("*", (req, res, next) => {
   console.log(`-------------------------------------------------`);
 
   console.log(`req.ip: `, req.ip);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.ips: `, req.ips);
   console.log(`-------------------------------------------------`);
 
   console.log(`req.method: `, req.method);
