@@ -29,37 +29,67 @@ app.use(express.json());
 // };
 // app.use(cors(corsOptions)); //TODO: should use????
 
+app.options("*", (req, res, next) => {
+  console.log(`accessed OPTIONS`);
+
+  console.log(`req.baseUrl: `, req.baseUrl);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.body: `, req.body);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.fresh: `, req.fresh);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.headers: `, req.headers);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.hostname: `, req.hostname);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.httpVersion: `, req.httpVersion);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.ip: `, req.ip);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.method: `, req.method);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.originalUrl: `, req.originalUrl);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.params: `, req.params);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.path: `, req.path);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.protocol: `, req.protocol);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.route: `, req.route);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.secure: `, req.secure);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.subdomains: `, req.subdomains);
+  console.log(`-------------------------------------------------`);
+
+  console.log(`req.url: `, req.url);
+  console.log(`-------------------------------------------------`);
+
+  next();
+});
+
 app.use(
   cors({
-    origin: [musicatorAppUrl, "http://localhost:3000"], // Replace with your frontend's URL
-    methods: ["GET", "POST", "OPTIONS"], // Allowed methods
-    allowedHeaders: ["Content-Type", "content-type", "Authorization"], // Allowed headers
+    origin: [musicatorAppUrl, "http://localhost:3000"],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "content-type", "Authorization"],
   })
 );
-
-// app.use((req, res, next) => {
-//   res.set("Access-Control-Allow-Origin", musicatorAppUrl);
-//   res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-//   res.set(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, content-type, Authorization"
-//   );
-//   next();
-// });
-
-// app.options("*", (req, res) => {
-//   res.set("Access-Control-Allow-Origin", musicatorAppUrl);
-//   res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-//   res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   res.status(204).send();
-// });
-
-// start of changes after nginx configuration
-app.options("*", (req, res) => {
-  console.log(`accessed OPTIONS request`);
-  res.status(204).send();
-});
-// end of changes after nginx configuration
 
 app.get("/", async (req, res) => {
   console.log(`accessed /`);
