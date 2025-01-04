@@ -85,7 +85,8 @@ app.options("*", (req, res, next) => {
 
 app.use(
   cors({
-    origin: [musicatorAppUrl, "http://localhost:3000"],
+    // origin: [musicatorAppUrl, "http://localhost:3000"],
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "content-type", "Authorization"],
   })
