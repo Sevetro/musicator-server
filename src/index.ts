@@ -31,7 +31,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: musicatorAppUrl, // Replace with your frontend's URL
+    origin: [musicatorAppUrl, "http://localhost:3000"], // Replace with your frontend's URL
     methods: ["GET", "POST", "OPTIONS"], // Allowed methods
     allowedHeaders: ["Content-Type", "content-type", "Authorization"], // Allowed headers
   })
@@ -56,6 +56,7 @@ app.use(
 
 // start of changes after nginx configuration
 app.options("*", (req, res) => {
+  console.log(`accessed OPTIONS request`);
   res.status(204).send();
 });
 // end of changes after nginx configuration
