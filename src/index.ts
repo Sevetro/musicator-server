@@ -1,6 +1,6 @@
 import express from "express";
 import "dotenv/config";
-import cors, { CorsOptions } from "cors";
+import cors from "cors";
 import { eq } from "drizzle-orm";
 
 import { db } from "./db/index.ts";
@@ -9,92 +9,21 @@ import {
   emailOccupiedErrorCode,
   nameOccupiedErrorCode,
 } from "./shared/error-codes.ts";
+import { logMiddleware } from "./middleware/log-middleware.ts";
 
 const musicatorAppUrl = "https://musicator.vercel.app";
+const myPrivateIp = process.env.MY_PRIVATE_IP as string;
 
 const app = express();
 
 app.use(express.json());
 
-// const whitelist = ["http://localhost:3000"];
-// const corsOptions: CorsOptions = {
-//   origin: (origin, callback) => {
-//     if (!origin || whitelist.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   credentials: true,
-// };
-// app.use(cors(corsOptions)); //TODO: should use????
-
-// app.set("trust proxy", true); // Ensure this is set if behind a proxy
-// If your app is behind a reverse proxy (e.g., Nginx or AWS ELB),
-// and you’ve set the trust proxy setting, req.ips will contain
-// an array of IPs from the X-Forwarded-For header.
-
-app.options("*", (req, res, next) => {
-  console.log(`accessed OPTIONS`);
-
-  console.log(`req.baseUrl: `, req.baseUrl);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.body: `, req.body);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.fresh: `, req.fresh);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.headers: `, req.headers);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.hostname: `, req.hostname);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.httpVersion: `, req.httpVersion);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.ip: `, req.ip);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.ips: `, req.ips);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.method: `, req.method);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.originalUrl: `, req.originalUrl);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.params: `, req.params);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.path: `, req.path);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.protocol: `, req.protocol);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.route: `, req.route);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.secure: `, req.secure);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.subdomains: `, req.subdomains);
-  console.log(`-------------------------------------------------`);
-
-  console.log(`req.url: `, req.url);
-  console.log(`-------------------------------------------------`);
-
-  next();
-});
+app.set("trust proxy", true);
+app.use("*", logMiddleware);
 
 app.use(
   cors({
-    // origin: [musicatorAppUrl, "http://localhost:3000"],
-    origin: "*",
+    origin: [musicatorAppUrl, "http://localhost:3000", myPrivateIp],
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "content-type", "Authorization"],
   })
