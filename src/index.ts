@@ -25,20 +25,9 @@ app.use(
   cors({
     origin: [musicatorAppUrl, "http://localhost:3000", myPrivateIp],
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "content-type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-app.get("/", async (req, res) => {
-  console.log(`accessed /`);
-  const users = await db.select().from(usersTable);
-  res.status(200).json(users);
-});
-
-app.post("/", async (req, res) => {
-  console.log(req.body);
-  res.status(200).send(req.body);
-});
 
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
