@@ -2,7 +2,7 @@ import { pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 import {
   maxEmailLength,
-  maxNameLength,
+  maxUsernameLength,
   maxPasswordLength,
 } from "../shared/validation.ts";
 
@@ -10,7 +10,9 @@ import {
 
 export const usersTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: varchar("name", { length: maxNameLength }).notNull().unique(),
+  username: varchar("username", { length: maxUsernameLength })
+    .notNull()
+    .unique(),
   email: varchar("email", { length: maxEmailLength }).notNull().unique(),
   hashedPassword: varchar("hashedPassword", {
     length: maxPasswordLength,
@@ -19,7 +21,9 @@ export const usersTable = pgTable("users", {
 
 export const pendingUsersTable = pgTable("pendingUsers", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: varchar("name", { length: maxNameLength }).notNull().unique(),
+  username: varchar("username", { length: maxUsernameLength })
+    .notNull()
+    .unique(),
   email: varchar("email", { length: maxEmailLength }).notNull().unique(),
   hashedPassword: varchar("hashedPassword", {
     length: maxPasswordLength,

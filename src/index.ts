@@ -7,7 +7,7 @@ import { db } from "./db/index.ts";
 import { pendingUsersTable, usersTable } from "./db/schema.ts";
 import {
   emailOccupiedErrorCode,
-  nameOccupiedErrorCode,
+  usernameOccupiedErrorCode,
 } from "./shared/error-codes.ts";
 import { logMiddleware } from "./middleware/log-middleware.ts";
 
@@ -30,23 +30,23 @@ app.use(
 );
 
 app.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  console.log(`name`, name);
+  console.log(`username`, username);
   console.log(`email`, email);
 
-  const userNameSearchResult = await db
+  const usernameSearchResult = await db
     .select()
     .from(usersTable)
-    .where(eq(usersTable.name, name));
+    .where(eq(usersTable.username, username));
   const userEmailSearchResult = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.email, email));
-  const pendingUserNameSearchResult = await db
+  const pendingUsernameSearchResult = await db
     .select()
     .from(pendingUsersTable)
-    .where(eq(pendingUsersTable.name, name));
+    .where(eq(pendingUsersTable.username, username));
   const pendingUserEmailSearchResult = await db
     .select()
     .from(pendingUsersTable)
@@ -54,10 +54,10 @@ app.post("/register", async (req, res) => {
 
   const errors: string[] = [];
   if (
-    userNameSearchResult.length > 0 ||
-    pendingUserNameSearchResult.length > 0
+    usernameSearchResult.length > 0 ||
+    pendingUsernameSearchResult.length > 0
   ) {
-    errors.push(nameOccupiedErrorCode);
+    errors.push(usernameOccupiedErrorCode);
   }
   if (
     userEmailSearchResult.length > 0 ||
