@@ -6,8 +6,6 @@ import {
   maxPasswordLength,
 } from "../shared/validation.ts";
 
-// Everything here should be exported to be accessible by database
-
 export const usersTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   username: varchar("username", { length: maxUsernameLength })
@@ -17,6 +15,7 @@ export const usersTable = pgTable("users", {
   hashedPassword: varchar("hashedPassword", {
     length: maxPasswordLength,
   }).notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
 });
 
 export const pendingUsersTable = pgTable("pendingUsers", {
