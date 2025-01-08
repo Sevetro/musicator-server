@@ -1,9 +1,7 @@
 import nodemailer from "nodemailer";
 
 import { localhostServerUrl } from "../constants/urls.ts";
-
-const musicatorEmail = process.env.EMAIL_LOGIN;
-const musicatorEmailPass = process.env.EMAIL_PASS;
+import { musicatorEmail, musicatorEmailPass } from "../constants/envs.ts";
 
 console.log(`musicatorEmail`, musicatorEmail);
 console.log(`musicatorEmailPass`, musicatorEmailPass);
