@@ -5,6 +5,9 @@ import { localhostServerUrl } from "../constants/urls.ts";
 const musicatorEmail = process.env.EMAIL_LOGIN;
 const musicatorEmailPass = process.env.EMAIL_PASS;
 
+console.log(`musicatorEmail`, musicatorEmail);
+console.log(`musicatorEmailPass`, musicatorEmailPass);
+
 const transporter = nodemailer.createTransport({
   host: "smtp.wp.pl",
   port: 465,
