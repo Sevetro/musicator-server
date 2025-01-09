@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 import { db } from "../db/index.ts";
 
 async function dropTable() {
