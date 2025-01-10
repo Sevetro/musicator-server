@@ -18,7 +18,8 @@
     "get-users": "tsx src/scripts/get-users.ts",
     "get-pending-users": "tsx src/scripts/get-pending-users.ts",
     "drop-table": "tsx src/scripts/drop-table.ts",
-    "clear-table": "tsx src/scripts/clear-table.ts"
+    "clear-table": "tsx src/scripts/clear-table.ts",
+    "clear-auth-tables": "tsx src/scripts/clear-auth-tables.ts"
   },
   "author": "",
   "license": "ISC",

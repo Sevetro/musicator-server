@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 
 import { sendConfirmationEmail } from "../utils/send-confirmation-email.ts";
 import {
-  cannotCreatePendingUserErrorCode,
-  cannotSendConfirmationErrorCode,
+  cantCreatePendingUserErrorCode,
+  cantSendConfirmationErrorCode,
 } from "../shared/error-codes.ts";
 import { generateRandomToken } from "../utils/generate-random-token.ts";
 import { sendInternalErrorResponse } from "../utils/send-internal-error-response.ts";
@@ -29,7 +29,7 @@ export const registerController = async (req: Request, res: Response) => {
       await sendConfirmationEmail(email, confirmationToken);
     } catch (err) {
       console.error("Error in sendConfirmationEmail: ", err);
-      sendApiError(res, 400, cannotSendConfirmationErrorCode); //TODO: add FE handling
+      sendApiError(res, 400, cantSendConfirmationErrorCode); //TODO: add FE handling
       return;
     }
 
@@ -37,7 +37,7 @@ export const registerController = async (req: Request, res: Response) => {
       await createPendingUser(username, email, password, confirmationToken);
     } catch (err) {
       console.error("Error in createPendingUser: ", err);
-      sendApiError(res, 500, cannotCreatePendingUserErrorCode); //TODO: add FE handling
+      sendApiError(res, 500, cantCreatePendingUserErrorCode); //TODO: add FE handling
 
       return;
     }
