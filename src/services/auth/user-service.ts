@@ -7,7 +7,6 @@ import {
   usernameOccupiedErrorCode,
 } from "../../shared/error-codes.ts";
 import { hashPassword } from "../../utils/hash-password.ts";
-import { generateRandomToken } from "../../utils/generate-random-token.ts";
 
 export const checkIfUserExists = async (
   username: string,
@@ -46,23 +45,17 @@ export const checkIfUserExists = async (
 export const createPendingUser = async (
   username: string,
   email: string,
-  password: string
+  password: string,
+  confirmationToken: string
 ) => {
   const hashedPassword = await hashPassword(password);
-  const confirmationToken = generateRandomToken();
   const tokenExpiresAt = new Date(Date.now() + 86400 * 1000);
 
-  try {
-    await db.insert(pendingUsersTable).values({
-      username,
-      email,
-      hashedPassword,
-      confirmationToken,
-      tokenExpiresAt,
-    });
-  } catch (err) {
-    console.error("Error creating pending user: ", err);
-  }
-
-  return confirmationToken;
+  await db.insert(pendingUsersTable).values({
+    username,
+    email,
+    hashedPassword,
+    confirmationToken,
+    tokenExpiresAt,
+  });
 };
