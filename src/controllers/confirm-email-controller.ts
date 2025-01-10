@@ -1,9 +1,9 @@
 import { eq } from "drizzle-orm";
 
 import { Request, Response } from "express";
-import { db } from "../../db/index.ts";
-import { pendingUsersTable, usersTable } from "../../db/schema.ts";
-import { sendInternalErrorResponse } from "../../utils/send-internal-error-response.ts";
+import { db } from "../db/index.ts";
+import { pendingUsersTable, usersTable } from "../db/schema.ts";
+import { sendInternalErrorResponse } from "../utils/send-internal-error-response.ts";
 
 export const confirmEmailController = async (req: Request, res: Response) => {
   try {

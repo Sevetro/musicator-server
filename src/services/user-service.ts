@@ -1,12 +1,12 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "../../db/index.ts";
-import { pendingUsersTable, usersTable } from "../../db/schema.ts";
+import { db } from "../db/index.ts";
+import { pendingUsersTable, usersTable } from "../db/schema.ts";
 import {
   emailOccupiedErrorCode,
   usernameOccupiedErrorCode,
-} from "../../shared/error-codes.ts";
-import { hashPassword } from "../../utils/hash-password.ts";
+} from "../shared/error-codes.ts";
+import { hashPassword } from "../utils/hash-password.ts";
 
 export const checkIfUserExists = async (
   username: string,

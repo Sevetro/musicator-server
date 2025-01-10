@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 
-import {
-  checkIfUserExists,
-  createPendingUser,
-} from "../../services/auth/user-service.ts";
-import { sendConfirmationEmail } from "../../utils/send-confirmation-email.ts";
+import { sendConfirmationEmail } from "../utils/send-confirmation-email.ts";
 import {
   cannotCreatePendingUserErrorCode,
   cannotSendConfirmationErrorCode,
-} from "../../shared/error-codes.ts";
-import { generateRandomToken } from "../../utils/generate-random-token.ts";
-import { sendInternalErrorResponse } from "../../utils/send-internal-error-response.ts";
-import { sendApiError } from "../../utils/send-api-error.ts";
+} from "../shared/error-codes.ts";
+import { generateRandomToken } from "../utils/generate-random-token.ts";
+import { sendInternalErrorResponse } from "../utils/send-internal-error-response.ts";
+import { sendApiError } from "../utils/send-api-error.ts";
+import {
+  checkIfUserExists,
+  createPendingUser,
+} from "../services/user-service.ts";
 
 export const registerController = async (req: Request, res: Response) => {
   try {
