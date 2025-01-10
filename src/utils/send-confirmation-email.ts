@@ -1,7 +1,11 @@
 import nodemailer from "nodemailer";
 
-import { musicatorAppUrl } from "../constants/urls.ts";
-import { MUSICATOR_EMAIL, MUSICATOR_EMAIL_PASS } from "../constants/envs.ts";
+import { localhostAppUrl, musicatorAppUrl } from "../constants/urls.ts";
+import {
+  MUSICATOR_EMAIL,
+  MUSICATOR_EMAIL_PASS,
+  NODE_ENV,
+} from "../constants/envs.ts";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.wp.pl",
@@ -17,7 +21,9 @@ export const sendConfirmationEmail = async (
   email: string,
   confirmationToken: string
 ) => {
-  const url = `${musicatorAppUrl}/confirm_email/${confirmationToken}`;
+  const url = `${
+    NODE_ENV === "dev" ? localhostAppUrl : musicatorAppUrl
+  }/confirm_email/${confirmationToken}`;
 
   await transporter.sendMail({
     from: MUSICATOR_EMAIL,
