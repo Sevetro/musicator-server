@@ -4,8 +4,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "start": "tsx src/index.ts",
+    "dev": "cross-env NODE_ENV=dev tsx watch src/index.ts",
+    "start": "cross-env NODE_ENV=prod tsx src/index.ts",
     "pm2": "node ./node_modules/pm2/bin/pm2",
     "pm2:start": "node ./node_modules/pm2/bin/pm2 start src/index.ts --interpreter tsx",
     "pm2:stop": "node ./node_modules/pm2/bin/pm2 stop 0",
@@ -48,6 +48,7 @@
     "@types/node": "^18.19.50",
     "@types/nodemailer": "^6.4.17",
     "@types/pg": "^8.11.10",
+    "cross-env": "^7.0.3",
     "tsx": "^4.19.1",
     "typescript": "^5.4.2"
   }

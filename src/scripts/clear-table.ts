@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { db } from "../db/index.ts";
 
 const clearTable = async () => {
@@ -9,11 +10,9 @@ const clearTable = async () => {
     process.exit(1);
   }
 
-  const query = `TRUNCATE TABLE ${tableName} RESTART IDENTITY CASCADE;`;
-
   try {
-    await db.execute(query);
-    console.log("Table cleared successfully");
+    await db.execute(sql`TRUNCATE TABLE ${sql.raw(`"${tableName}"`)}`);
+    console.log(`Table ${tableName} cleared successfully`);
   } catch (error) {
     console.error("Error clearing table:", error);
   }
