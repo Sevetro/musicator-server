@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=dev tsx watch src/index.ts",
     "start": "cross-env NODE_ENV=prod tsx src/index.ts",
     "pm2": "node ./node_modules/pm2/bin/pm2",
-    "pm2:start": "node ./node_modules/pm2/bin/pm2 start src/index.ts --interpreter tsx",
+    "pm2:start": "cross-env NODE_ENV=prod node ./node_modules/pm2/bin/pm2 start src/index.ts --interpreter tsx",
     "pm2:stop": "node ./node_modules/pm2/bin/pm2 stop 0",
     "pm2:restart": "node ./node_modules/pm2/bin/pm2 restart 0",
     "pm2:log": "node ./node_modules/pm2/bin/pm2 log",
