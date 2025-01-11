@@ -1,6 +1,8 @@
 import { RequestHandler } from "express";
 
 export const logMiddleware: RequestHandler = (req, res, next) => {
+  console.log(`#################################################`);
+
   console.log(`req.baseUrl: `, req.baseUrl);
   console.log(`-------------------------------------------------`);
 

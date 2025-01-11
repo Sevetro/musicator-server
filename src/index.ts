@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.set("trust proxy", true);
-// app.use("*", logMiddleware);
+app.use("*", logMiddleware);
 
 app.use(
   cors({
