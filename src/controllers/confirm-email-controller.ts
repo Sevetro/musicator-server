@@ -8,12 +8,10 @@ import { sendInternalErrorResponse } from "../utils/send-internal-error-response
 export const confirmEmailController = async (req: Request, res: Response) => {
   try {
     const { token } = req.params;
-    console.log(`confirmEmailAccessed`);
 
     const pendingUser = await db.query.pendingUsersTable.findFirst({
       where: eq(pendingUsersTable.confirmationToken, token),
     });
-    console.log(`pendingUser :`, pendingUser);
 
     if (pendingUser === undefined) {
       res.status(404).json({ errors: ["Invalid or expired token."] }); //TODO: add FE handling, use sendApiError
@@ -26,19 +24,16 @@ export const confirmEmailController = async (req: Request, res: Response) => {
       return;
     }
 
-    console.log(`before deleting pending user`);
     await db
       .delete(pendingUsersTable)
       .where(eq(pendingUsersTable.id, pendingUser.id));
 
-    console.log(`before creating user`);
     await db.insert(usersTable).values({
       username: pendingUser.username,
       email: pendingUser.email,
       hashedPassword: pendingUser.hashedPassword,
     });
 
-    console.log(`before sending status 201`);
     res.sendStatus(201);
   } catch (error) {
     console.error("Error in confirmEmailController:", error);
