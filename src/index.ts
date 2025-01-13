@@ -19,6 +19,7 @@ app.use(
     origin: [musicatorAppUrl, localhostAppUrl, MY_PRIVATE_IP],
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, //TODO: to delete?
   })
 );
 
