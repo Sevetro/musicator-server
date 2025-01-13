@@ -38,7 +38,6 @@ export const registerController = async (req: Request, res: Response) => {
     } catch (err) {
       console.error("Error in createPendingUser: ", err);
       sendApiError(res, 500, cantCreatePendingUserErrorCode); //TODO: add FE handling
-
       return;
     }
 
