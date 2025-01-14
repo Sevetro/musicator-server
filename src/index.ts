@@ -17,7 +17,7 @@ app.use("*", logMiddleware);
 app.use(
   cors({
     // origin: [musicatorAppUrl, localhostAppUrl, MY_PRIVATE_IP],
-    // origin: [musicatorAppUrl, localhostAppUrl],
+    origin: [musicatorAppUrl, localhostAppUrl],
 
     // origin: "*",
 
