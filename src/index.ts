@@ -14,16 +14,18 @@ app.use(express.json());
 app.set("trust proxy", true);
 app.use("*", logMiddleware);
 
-// app.use(
-//   cors({
-//     // origin: [musicatorAppUrl, localhostAppUrl, MY_PRIVATE_IP],
-//     origin: "*",
+app.use(
+  cors({
+    // origin: [musicatorAppUrl, localhostAppUrl, MY_PRIVATE_IP],
+    origin: [musicatorAppUrl, localhostAppUrl],
 
-//     methods: ["GET", "POST", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     credentials: true, //TODO: to delete?
-//   })
-// );
+    // origin: "*",
+
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, //TODO: to delete?
+  })
+);
 
 app.post("/register", registerController);
 app.get("/confirm_email/:token", confirmEmailController);
