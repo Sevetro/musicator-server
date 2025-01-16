@@ -17,13 +17,14 @@ app.use("*", logMiddleware);
 app.use(
   cors({
     // origin: [musicatorAppUrl, localhostAppUrl, MY_PRIVATE_IP],
-    origin: [musicatorAppUrl, localhostAppUrl],
+    // origin: [musicatorAppUrl, localhostAppUrl],
+    origin: [localhostAppUrl],
 
     // origin: "*",
 
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, //TODO: to delete?
+    // credentials: true, //TODO: to delete?
   })
 );
 
