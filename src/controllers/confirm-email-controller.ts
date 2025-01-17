@@ -4,6 +4,11 @@ import { Request, Response } from "express";
 import { db } from "../db/index.ts";
 import { pendingUsersTable, usersTable } from "../db/schema.ts";
 import { sendInternalErrorResponse } from "../utils/send-internal-error-response.ts";
+import {
+  expiredTokenErrorCode,
+  invalidOrExpiredTokenErrorCode,
+} from "../shared/error-codes.ts";
+import { sendApiError } from "../utils/send-api-error.ts";
 
 export const confirmEmailController = async (req: Request, res: Response) => {
   try {
@@ -14,13 +19,13 @@ export const confirmEmailController = async (req: Request, res: Response) => {
     });
 
     if (pendingUser === undefined) {
-      res.status(404).json({ errors: ["Invalid or expired token."] }); //TODO: add FE handling, use sendApiError
+      sendApiError(res, 404, invalidOrExpiredTokenErrorCode);
       return;
     }
 
     const now = new Date();
     if (pendingUser.tokenExpiresAt < now) {
-      res.status(410).json({ errors: ["Token has expired."] }); //TODO: add FE handling, use sendApiError
+      sendApiError(res, 410, expiredTokenErrorCode);
       return;
     }
 

@@ -29,7 +29,7 @@ export const registerController = async (req: Request, res: Response) => {
       await sendConfirmationEmail(email, confirmationToken);
     } catch (err) {
       console.error("Error in sendConfirmationEmail: ", err);
-      sendApiError(res, 400, cantSendConfirmationErrorCode); //TODO: add FE handling
+      sendApiError(res, 400, cantSendConfirmationErrorCode);
       return;
     }
 
@@ -37,13 +37,13 @@ export const registerController = async (req: Request, res: Response) => {
       await createPendingUser(username, email, password, confirmationToken);
     } catch (err) {
       console.error("Error in createPendingUser: ", err);
-      sendApiError(res, 500, cantCreatePendingUserErrorCode); //TODO: add FE handling
+      sendApiError(res, 500, cantCreatePendingUserErrorCode);
       return;
     }
 
     res.status(201).json({ email });
   } catch (err) {
     console.error("Error in registerController:", err);
-    sendInternalErrorResponse(res); //TODO: add FE handling
+    sendInternalErrorResponse(res);
   }
 };
